@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+  </body>
+</html>
+<script type="text/javascript">
+	// fetch 请求
+	function cross_origin_request(url, params) {
+		if(window.fetch) {
+			fetch(url, params).then(response => response.json())
+		  	.then(data => console.log(data))
+		  	.catch(e => console.log("error", e))
+		} else {
+		    alert('大兄弟，该换个现代浏览器了～')
+		}		
+	}
+	var backend_url = 'http://' + window.location.hostname + ':3000' + '/users'
+
+	// 简单请求
+	cross_origin_request(backend_url)
+
+	// 非简单请求
+	cross_origin_request(backend_url, {method: 'PUT'})
+
+	// jsonp
+	function appendScript(src) {
+	  var script = document.createElement('script');
+	  script.setAttribute("type", "text/javascript");
+	  script.src = src;
+	  document.body.appendChild(script);
+	}
+
+    appendScript('http://' + window.location.hostname + ':3000' + '/users?callback=jsonp');
+
+	function jsonp(data) {
+	  console.log(data);
+	};
+
+</script>

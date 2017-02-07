@@ -9,3 +9,14 @@
     <p>Welcome to <%= title %></p>
   </body>
 </html>
+<script type="text/javascript">
+	// postMessage
+	window.onload = () => {	
+		onmessage = (e) => {
+			e = e || event;
+			document.write(JSON.stringify(e.data));
+			var window_parent = window.parent;
+			window_parent.postMessage('我肯定是支持的', 'http://' + window.location.hostname + ':3001')
+		};
+	}
+</script>

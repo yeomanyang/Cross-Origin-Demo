@@ -10,14 +10,14 @@ var users = require('./routes/users');
 
 var app = express();
 
+// CORS
 app.all('*',function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   res.header('Access-Control-Max-Age', 3600)
   if (req.method == 'OPTIONS') {
     res.send('OPTIONS PASSED');
-  }
-  else {
+  } else {
     next();
   }
 });
